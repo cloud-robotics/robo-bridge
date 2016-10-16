@@ -1,0 +1,12 @@
+mqtt.host: 192.168.99.100:31883
+server.port: 9002
+---
+spring:
+    profiles: production
+mqtt:
+  host: ${mqtt_host}
+  port: ${mqtt_port}
+server:
+  port: 9002
+command_svc_url: http://command-svc:8080
+state_svc_url: http://state-svc:8080

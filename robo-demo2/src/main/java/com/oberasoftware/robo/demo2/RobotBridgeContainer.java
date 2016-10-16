@@ -48,10 +48,11 @@ public class RobotBridgeContainer {
                 .remote(RemoteCloudDriver.class, true)
                 .build();
 
-        max.getMotionEngine().runMotion("ArmInit");
-        sleepUninterruptibly(2, TimeUnit.SECONDS);
+        max.getMotionEngine().runMotion("ArmControl");
+        sleepUninterruptibly(10, TimeUnit.SECONDS);
         max.getServoDriver().setTorgue("13", false);
         max.getServoDriver().setTorgue("17", false);
+        LOG.info("Robot ready for demo");
 
         MaxRobotEventHandler maxHandler = new MaxRobotEventHandler(pep);
         max.listen(maxHandler);
