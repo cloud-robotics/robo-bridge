@@ -50,8 +50,9 @@ public class RobotBridgeContainer {
 
         max.getMotionEngine().runMotion("ArmControl");
         sleepUninterruptibly(10, TimeUnit.SECONDS);
-        max.getServoDriver().setTorgue("13", false);
-        max.getServoDriver().setTorgue("17", false);
+        max.getServoDriver().setTorgue("15", false);
+        max.getServoDriver().setTorgue("5", false);
+        max.getServoDriver().setTorgue("2", false);
         LOG.info("Robot ready for demo");
 
         MaxRobotEventHandler maxHandler = new MaxRobotEventHandler(pep);

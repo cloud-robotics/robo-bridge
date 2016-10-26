@@ -44,10 +44,13 @@ public class MaxRobotEventHandler implements EventHandler {
             handleHandsEvent(valueEvent);
         } else if(controllerId.equals("max") && itemId.equals("HandYaw")) {
             handleHandsRoll(valueEvent);
-        } else if(controllerId.equals("max") && itemId.equals("Walk")) {
-            handleWalk(valueEvent);
-        } else if(controllerId.equals("max") && itemId.equals("WalkDirection")) {
-            handleWalkDirection(valueEvent);
+        }
+        if(handsOpen.get()) {
+            if (controllerId.equals("max") && itemId.equals("Walk")) {
+                handleWalk(valueEvent);
+            } else if (controllerId.equals("max") && itemId.equals("WalkDirection")) {
+                handleWalkDirection(valueEvent);
+            }
         }
     }
 
@@ -92,14 +95,14 @@ public class MaxRobotEventHandler implements EventHandler {
     private void handleWalk(ValueEvent valueEvent) {
         int position = valueEvent.getValue().getValue();
 
-        if(position < 200 && walkMode.compareAndSet(STOPPED, FORWARD)) {
+        if(position >650 && position < 750 && walkMode.compareAndSet(STOPPED, FORWARD)) {
             LOG.info("Walking forward");
             pep.getMotionEngine().walk(WalkDirection.FORWARD);
-        } else if(position >=200 && position <=300 && walkMode.get() != STOPPED) {
+        } else if(position >=750 && position <=820 && walkMode.get() != STOPPED) {
             LOG.info("Stop walking");
             pep.getMotionEngine().stopWalking();
             walkMode.set(0);
-        } else if(position >300 && walkMode.compareAndSet(STOPPED, BACKWARD)) {
+        } else if(position >820 && walkMode.compareAndSet(STOPPED, BACKWARD)) {
             LOG.info("Walking backward");
             pep.getMotionEngine().walk(WalkDirection.BACKWARD);
         }
